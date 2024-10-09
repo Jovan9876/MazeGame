@@ -18,7 +18,6 @@ public class InputHandler : MonoBehaviour {
     public bool phase { get; private set; } = true;
 
 
-
     private void OnEnable() {
         if (inputActions == null) {
             inputActions = new InputActions();

@@ -11,12 +11,11 @@ public class PlayerMovement : MonoBehaviour {
     private Rigidbody playerRigidbody;
     private Animator animator;
     private Collider playerCollider;
-    public Transform cameraObject;
+    [SerializeField] private Transform cameraObject;
 
     private Vector3 moveDirection;
     private float movementSpeed = 5f;
-    private float rotationSpeed = 250f;
-    private float xRotation = 0f;
+    private float rotationSpeed = 350f;
 
 
     private void Awake() {
@@ -51,15 +50,13 @@ public class PlayerMovement : MonoBehaviour {
     private void HandleRotation() {
 
         float mouseX = inputHandler.horizontalMouseInput * rotationSpeed * Time.deltaTime;
-        float mouseY = inputHandler.verticalMouseInput * rotationSpeed * Time.deltaTime;
 
-        xRotation -= mouseY;
-        xRotation = Mathf.Clamp(xRotation, -80f, 80f);
+        // Rotate player left/right from mouse input -- camera automatically follows
+        //transform.Rotate(Vector3.up * mouseX);
+        Quaternion targetRotation = transform.rotation * Quaternion.Euler(0f, mouseX, 0f);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
 
-        cameraObject.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
-
-        transform.Rotate(Vector3.up * mouseX);
-
+        // Up and down of camera handled from inputhandler attached to cinemachine camera
     }
 
     private void HandlePhase() {

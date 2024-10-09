@@ -32,7 +32,6 @@ public class PlayerManager : MonoBehaviour {
 
     public void ResetPlayer() {
         transform.SetPositionAndRotation(new Vector3(GameManager.Instance.startX * GameManager.Instance.cellSize, 0, GameManager.Instance.startY * GameManager.Instance.cellSize), Quaternion.identity);
-        playerMovement.cameraObject.localRotation = Quaternion.identity;
     }
 
 }

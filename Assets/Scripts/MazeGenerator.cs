@@ -57,7 +57,6 @@ public class MazeGenerator : MonoBehaviour {
     }
 
     private void SetMaterials() {
-        //maze[startX, startY].SetSpawnMaterials();
         maze[mazeWidth - 1, mazeHeight - 1].SetFinish();
     }
 

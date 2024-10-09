@@ -15,7 +15,7 @@ public class EnemyManager : MonoBehaviour {
     public float changeDirectionTime = 2f;
     private float directionChangeTimer;
     private bool isIdling = true;
-    private float idleTime= 10f;
+    private float idleTime= 5f;
     private Vector3 movementDirection;
 
     private void Awake() {
@@ -77,7 +77,7 @@ public class EnemyManager : MonoBehaviour {
 
     private void ChangeDirection() {
         // Randomize the direction
-        movementDirection = new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f)).normalized;
+        movementDirection = new Vector3(Random.Range(-1f, 1f), 0f, Random.Range(-1f, 1f)).normalized;
 
         // Set the horizontal and vertical inputs based on movement direction
         horizontalInput = movementDirection.x;
@@ -85,7 +85,7 @@ public class EnemyManager : MonoBehaviour {
     }
 
     public void ResetEnemy() {
-        transform.SetPositionAndRotation(new Vector3(GameManager.Instance.enemyX * GameManager.Instance.cellSize, 0, GameManager.Instance.enemyY * GameManager.Instance.cellSize), Quaternion.identity);
+        transform.SetPositionAndRotation(new Vector3(GameManager.Instance.enemyX * GameManager.Instance.cellSize, 0f, GameManager.Instance.enemyY * GameManager.Instance.cellSize), Quaternion.identity);
     }
 
     private void Idle() {

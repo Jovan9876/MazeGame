@@ -28,7 +28,6 @@ public class MazeCellObject : MonoBehaviour {
     // Placeholder gameobject in each cell
     [SerializeField] private GameObject unvistedBlock;
 
-
     public void DestroyWall(string direction) {
         switch (direction) {
             case "Left":
