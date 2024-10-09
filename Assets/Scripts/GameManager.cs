@@ -60,7 +60,7 @@ public class GameManager : MonoBehaviour {
         enemyY = mazeWidth - 1 - startY;
 
         // Spawn the enemy at the opposite corner
-        Instantiate(enemyPrefab, new Vector3(enemyX * cellSize, 0, enemyY * cellSize), Quaternion.identity);
+        Instantiate(enemyPrefab, new Vector3(enemyX * cellSize, 0f, enemyY * cellSize), Quaternion.identity);
     }
 
 
