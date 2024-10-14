@@ -41,6 +41,11 @@ public class PlayerMovement : MonoBehaviour {
         moveDirection *= movementSpeed;
 
         playerRigidbody.velocity = moveDirection;
+        if (inputHandler.horizontalInput != 0 || inputHandler.verticalInput != 0) {
+
+            SoundManager.PlaySound(SoundManager.Sound.PlayerMove);
+        }
+
 
         animator.SetFloat("InputX", inputHandler.horizontalInput);
         animator.SetFloat("InputY", inputHandler.verticalInput);

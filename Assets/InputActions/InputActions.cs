@@ -62,6 +62,15 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Projectile"",
+                    ""type"": ""Button"",
+                    ""id"": ""25dd929b-8c4c-4050-be59-5c2df1f72406"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -328,6 +337,17 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""action"": ""Reset"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""60a3ed8c-4003-4416-a86b-57493e9c4824"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Projectile"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -340,6 +360,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         m_Player_Phase = m_Player.FindAction("Phase", throwIfNotFound: true);
         m_Player_MouseMovement = m_Player.FindAction("MouseMovement", throwIfNotFound: true);
         m_Player_Reset = m_Player.FindAction("Reset", throwIfNotFound: true);
+        m_Player_Projectile = m_Player.FindAction("Projectile", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -405,6 +426,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Phase;
     private readonly InputAction m_Player_MouseMovement;
     private readonly InputAction m_Player_Reset;
+    private readonly InputAction m_Player_Projectile;
     public struct PlayerActions
     {
         private @InputActions m_Wrapper;
@@ -413,6 +435,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         public InputAction @Phase => m_Wrapper.m_Player_Phase;
         public InputAction @MouseMovement => m_Wrapper.m_Player_MouseMovement;
         public InputAction @Reset => m_Wrapper.m_Player_Reset;
+        public InputAction @Projectile => m_Wrapper.m_Player_Projectile;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -434,6 +457,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @Reset.started += instance.OnReset;
             @Reset.performed += instance.OnReset;
             @Reset.canceled += instance.OnReset;
+            @Projectile.started += instance.OnProjectile;
+            @Projectile.performed += instance.OnProjectile;
+            @Projectile.canceled += instance.OnProjectile;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -450,6 +476,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @Reset.started -= instance.OnReset;
             @Reset.performed -= instance.OnReset;
             @Reset.canceled -= instance.OnReset;
+            @Projectile.started -= instance.OnProjectile;
+            @Projectile.performed -= instance.OnProjectile;
+            @Projectile.canceled -= instance.OnProjectile;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -473,5 +502,6 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         void OnPhase(InputAction.CallbackContext context);
         void OnMouseMovement(InputAction.CallbackContext context);
         void OnReset(InputAction.CallbackContext context);
+        void OnProjectile(InputAction.CallbackContext context);
     }
 }

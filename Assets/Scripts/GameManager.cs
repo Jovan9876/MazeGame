@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour {
         }
         Instance = this;
         DontDestroyOnLoad(gameObject);
+        SoundManager.Init();
     }
 
     private void Start() {
@@ -47,11 +48,11 @@ public class GameManager : MonoBehaviour {
 
         mazeGenerator = GetComponent<MazeGenerator>();
         mazeGenerator.GenerateMaze(mazeWidth, mazeHeight, startX, startY, cellSize);
-        SpawnPlayerAfterMazeGeneration();
+        SpawnPlayersAfterMazeGeneration();
 
     }
 
-    private void SpawnPlayerAfterMazeGeneration() {
+    private void SpawnPlayersAfterMazeGeneration() {
         // Instantiate the player prefab at the start position
         Instantiate(playerPreab, new Vector3(startX * cellSize, 0, startY * cellSize), Quaternion.identity);
 

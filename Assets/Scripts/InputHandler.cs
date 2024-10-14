@@ -27,8 +27,13 @@ public class InputHandler : MonoBehaviour {
             inputActions.Player.MouseMovement.canceled += i => mouseInput = Vector2.zero;
             inputActions.Player.Phase.performed += TogglePhase;
             inputActions.Player.Reset.performed += Reset_performed;
+            inputActions.Player.Projectile.performed += ThrowBallPerformed;
         }
         inputActions.Enable();
+    }
+
+    private void ThrowBallPerformed(InputAction.CallbackContext context) {
+        PlayerManager.Instance.HandleBallThrow();
     }
 
     private void Reset_performed(InputAction.CallbackContext obj) {

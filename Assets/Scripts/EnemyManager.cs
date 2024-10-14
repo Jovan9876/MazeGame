@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class EnemyManager : MonoBehaviour {
@@ -8,6 +9,7 @@ public class EnemyManager : MonoBehaviour {
 
     private Animator animator;
     private Rigidbody enemyRigidbody;
+    [SerializeField] private GameObject enemyPrefab;
 
     private float horizontalInput;
     private float verticalInput;
@@ -15,8 +17,10 @@ public class EnemyManager : MonoBehaviour {
     public float changeDirectionTime = 2f;
     private float directionChangeTimer;
     private bool isIdling = true;
-    private float idleTime= 5f;
+    private float idleTime = 5f;
     private Vector3 movementDirection;
+    private int health = 3;
+
 
     private void Awake() {
         if (Instance != null) {
@@ -35,6 +39,7 @@ public class EnemyManager : MonoBehaviour {
         ChangeDirection(); // Set initial direction
         directionChangeTimer = changeDirectionTime; // Initialize the timer
     }
+
 
     private void FixedUpdate() {
 
@@ -90,6 +95,31 @@ public class EnemyManager : MonoBehaviour {
 
     private void Idle() {
         Invoke("", idleTime);
+    }
+
+    public void HitByBall() {
+        health--;
+        CheckHealth();
+    }
+
+    private void CheckHealth() {
+        if (health <= 0) {
+            // Move enemy super far away
+            Vector3 newEnemyPosition = new Vector3(1000f, 0, 1000f);
+            gameObject.transform.position = newEnemyPosition;
+            SoundManager.PlaySound(SoundManager.Sound.EnemyDie);
+            Invoke("RespawnAtRandomLocation", 5f);
+            Debug.Log("Respawning after 5seconds");
+        }
+    }
+
+    private void RespawnAtRandomLocation() {
+        SoundManager.PlaySound(SoundManager.Sound.EnemyRespawn);
+        // Generate random coordinates within the maze
+        int randomX = Random.Range(0, GameManager.Instance.mazeWidth);
+        int randomY = Random.Range(0, GameManager.Instance.mazeHeight);
+        gameObject.transform.position = new Vector3(randomX * GameManager.Instance.cellSize, 0f, randomY * GameManager.Instance.cellSize);
+        health = 3;
     }
 
 }

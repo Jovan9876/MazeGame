@@ -676,6 +676,61 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &1797760249
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1797760251}
+  - component: {fileID: 1797760250}
+  m_Layer: 0
+  m_Name: SoundAssets
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1797760250
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1797760249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a99295b0db0701e4ca4786f2754faacf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundAudioClipArray:
+  - sound: 4
+    audioClip: {fileID: 8300000, guid: 85bb7415567fa5f4ba047a249556f059, type: 3}
+  - sound: 1
+    audioClip: {fileID: 8300000, guid: 0f4ab3424e5860e44addeaeea2cda286, type: 3}
+  - sound: 0
+    audioClip: {fileID: 8300000, guid: 1a7741daba5446e46a40f8074aae75dc, type: 3}
+  - sound: 2
+    audioClip: {fileID: 8300000, guid: c695e5f32593ef3408ec74925696b0bc, type: 3}
+  - sound: 3
+    audioClip: {fileID: 8300000, guid: ced3e16522813074b884f04e626e8607, type: 3}
+--- !u!4 &1797760251
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1797760249}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 15.583031, y: 31.42402, z: 14.12601}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1875182275
 GameObject:
   m_ObjectHideFlags: 0
@@ -755,3 +810,4 @@ SceneRoots:
   - {fileID: 1752770995}
   - {fileID: 326837935}
   - {fileID: 557680380}
+  - {fileID: 1797760251}
