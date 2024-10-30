@@ -13,7 +13,6 @@ public class ThrowProjectile : MonoBehaviour {
 
 
     public void ThrowBall() {
-        Debug.Log("Performed");
         // Instantiate the ball at the throwPoint position and rotation
         GameObject ball = Instantiate(ballPrefab, throwPoint.position, throwPoint.rotation);
 

@@ -22,6 +22,8 @@ public class GameManager : MonoBehaviour {
     public int enemyY;
 
     [SerializeField] private TMP_Text finishText;
+    [SerializeField] private GameObject deathTextPanel;
+    [SerializeField] private TMP_Text deathText;
 
     private void Awake() {
         if (Instance != null) {
@@ -49,7 +51,6 @@ public class GameManager : MonoBehaviour {
         mazeGenerator = GetComponent<MazeGenerator>();
         mazeGenerator.GenerateMaze(mazeWidth, mazeHeight, startX, startY, cellSize);
         SpawnPlayersAfterMazeGeneration();
-
     }
 
     private void SpawnPlayersAfterMazeGeneration() {
@@ -69,8 +70,15 @@ public class GameManager : MonoBehaviour {
         finishText.gameObject.SetActive(true);
     }
 
+    public void DisplayDeath() {
+        deathTextPanel.gameObject.SetActive(true);
+        deathText.gameObject.SetActive(true);
+    }
+
     public void Reset() {
         finishText.gameObject.SetActive(false);
+        deathTextPanel.gameObject.SetActive(false);
+        deathText.gameObject.SetActive(false);
     }
 
 }

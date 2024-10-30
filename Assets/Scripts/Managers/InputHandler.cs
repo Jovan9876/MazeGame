@@ -36,7 +36,7 @@ public class InputHandler : MonoBehaviour {
         PlayerManager.Instance.HandleBallThrow();
     }
 
-    private void Reset_performed(InputAction.CallbackContext obj) {
+    public void Reset_performed(InputAction.CallbackContext obj) {
         PlayerManager.Instance.ResetPlayer();
         EnemyManager.Instance.ResetEnemy();
         GameManager.Instance.Reset();

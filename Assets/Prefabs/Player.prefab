@@ -49,7 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Priority:
     Enabled: 0
-    m_Value: 0
+    m_Value: 300
   OutputChannel: 1
   StandbyUpdate: 2
   m_StreamingVersion: 20230301
@@ -361,7 +361,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 006c85a4e0f985941abc98f7dbfcb06d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPreab: {fileID: 8838683367158208779}
 --- !u!114 &-2524304829526346711
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -414,9 +413,9 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 0
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 116
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!136 &8700938059580389528
 CapsuleCollider:
   m_ObjectHideFlags: 0

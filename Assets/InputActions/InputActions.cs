@@ -350,6 +350,157 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Pong"",
+            ""id"": ""772055f7-746d-4149-b824-6492ca6b55c3"",
+            ""actions"": [
+                {
+                    ""name"": ""Movement"",
+                    ""type"": ""Value"",
+                    ""id"": ""ea8528a7-e123-4a84-be9a-e004089c4a5b"",
+                    ""expectedControlType"": ""Vector3"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": ""Keyboard"",
+                    ""id"": ""d10ea99c-d9d7-4d13-b243-0d9fdbea75c6"",
+                    ""path"": ""3DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""c43643c6-f98c-4f56-8155-9e19b5569ef7"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""fb9e0c4e-cede-4cc3-96eb-961a3f7dcf42"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Controller"",
+                    ""id"": ""f3b55edb-5896-4393-8a54-727e1613d9cf"",
+                    ""path"": ""3DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""e4e032f3-baa0-421d-8da3-763a8f47bd15"",
+                    ""path"": ""<Gamepad>/leftStick/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""722c3f18-4b9b-41ec-a0d7-4e57a836c54a"",
+                    ""path"": ""<Gamepad>/leftStick/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                }
+            ]
+        },
+        {
+            ""name"": ""Console"",
+            ""id"": ""6b985f98-e68a-44d3-a38a-deaf2cbf8154"",
+            ""actions"": [
+                {
+                    ""name"": ""ToggleConsole"",
+                    ""type"": ""Button"",
+                    ""id"": ""e42b05a4-23d6-4064-ba40-cbbe14b55b02"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CloseConsole"",
+                    ""type"": ""Button"",
+                    ""id"": ""f3ff7987-1736-45fe-a434-400e6b702a01"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ExecuteCommand"",
+                    ""type"": ""Button"",
+                    ""id"": ""5f7baf3a-887e-4e88-861e-3332497d033f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""0db7299c-383d-4061-bcc3-06133c3a002b"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ToggleConsole"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f15d9a0c-52eb-4ced-96a5-3adbb61592c3"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CloseConsole"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fbce7a7c-1c86-433d-a393-e76e348aa21c"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ExecuteCommand"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -361,6 +512,14 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         m_Player_MouseMovement = m_Player.FindAction("MouseMovement", throwIfNotFound: true);
         m_Player_Reset = m_Player.FindAction("Reset", throwIfNotFound: true);
         m_Player_Projectile = m_Player.FindAction("Projectile", throwIfNotFound: true);
+        // Pong
+        m_Pong = asset.FindActionMap("Pong", throwIfNotFound: true);
+        m_Pong_Movement = m_Pong.FindAction("Movement", throwIfNotFound: true);
+        // Console
+        m_Console = asset.FindActionMap("Console", throwIfNotFound: true);
+        m_Console_ToggleConsole = m_Console.FindAction("ToggleConsole", throwIfNotFound: true);
+        m_Console_CloseConsole = m_Console.FindAction("CloseConsole", throwIfNotFound: true);
+        m_Console_ExecuteCommand = m_Console.FindAction("ExecuteCommand", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -496,6 +655,114 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         }
     }
     public PlayerActions @Player => new PlayerActions(this);
+
+    // Pong
+    private readonly InputActionMap m_Pong;
+    private List<IPongActions> m_PongActionsCallbackInterfaces = new List<IPongActions>();
+    private readonly InputAction m_Pong_Movement;
+    public struct PongActions
+    {
+        private @InputActions m_Wrapper;
+        public PongActions(@InputActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Movement => m_Wrapper.m_Pong_Movement;
+        public InputActionMap Get() { return m_Wrapper.m_Pong; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(PongActions set) { return set.Get(); }
+        public void AddCallbacks(IPongActions instance)
+        {
+            if (instance == null || m_Wrapper.m_PongActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_PongActionsCallbackInterfaces.Add(instance);
+            @Movement.started += instance.OnMovement;
+            @Movement.performed += instance.OnMovement;
+            @Movement.canceled += instance.OnMovement;
+        }
+
+        private void UnregisterCallbacks(IPongActions instance)
+        {
+            @Movement.started -= instance.OnMovement;
+            @Movement.performed -= instance.OnMovement;
+            @Movement.canceled -= instance.OnMovement;
+        }
+
+        public void RemoveCallbacks(IPongActions instance)
+        {
+            if (m_Wrapper.m_PongActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IPongActions instance)
+        {
+            foreach (var item in m_Wrapper.m_PongActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_PongActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public PongActions @Pong => new PongActions(this);
+
+    // Console
+    private readonly InputActionMap m_Console;
+    private List<IConsoleActions> m_ConsoleActionsCallbackInterfaces = new List<IConsoleActions>();
+    private readonly InputAction m_Console_ToggleConsole;
+    private readonly InputAction m_Console_CloseConsole;
+    private readonly InputAction m_Console_ExecuteCommand;
+    public struct ConsoleActions
+    {
+        private @InputActions m_Wrapper;
+        public ConsoleActions(@InputActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @ToggleConsole => m_Wrapper.m_Console_ToggleConsole;
+        public InputAction @CloseConsole => m_Wrapper.m_Console_CloseConsole;
+        public InputAction @ExecuteCommand => m_Wrapper.m_Console_ExecuteCommand;
+        public InputActionMap Get() { return m_Wrapper.m_Console; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(ConsoleActions set) { return set.Get(); }
+        public void AddCallbacks(IConsoleActions instance)
+        {
+            if (instance == null || m_Wrapper.m_ConsoleActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_ConsoleActionsCallbackInterfaces.Add(instance);
+            @ToggleConsole.started += instance.OnToggleConsole;
+            @ToggleConsole.performed += instance.OnToggleConsole;
+            @ToggleConsole.canceled += instance.OnToggleConsole;
+            @CloseConsole.started += instance.OnCloseConsole;
+            @CloseConsole.performed += instance.OnCloseConsole;
+            @CloseConsole.canceled += instance.OnCloseConsole;
+            @ExecuteCommand.started += instance.OnExecuteCommand;
+            @ExecuteCommand.performed += instance.OnExecuteCommand;
+            @ExecuteCommand.canceled += instance.OnExecuteCommand;
+        }
+
+        private void UnregisterCallbacks(IConsoleActions instance)
+        {
+            @ToggleConsole.started -= instance.OnToggleConsole;
+            @ToggleConsole.performed -= instance.OnToggleConsole;
+            @ToggleConsole.canceled -= instance.OnToggleConsole;
+            @CloseConsole.started -= instance.OnCloseConsole;
+            @CloseConsole.performed -= instance.OnCloseConsole;
+            @CloseConsole.canceled -= instance.OnCloseConsole;
+            @ExecuteCommand.started -= instance.OnExecuteCommand;
+            @ExecuteCommand.performed -= instance.OnExecuteCommand;
+            @ExecuteCommand.canceled -= instance.OnExecuteCommand;
+        }
+
+        public void RemoveCallbacks(IConsoleActions instance)
+        {
+            if (m_Wrapper.m_ConsoleActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IConsoleActions instance)
+        {
+            foreach (var item in m_Wrapper.m_ConsoleActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_ConsoleActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public ConsoleActions @Console => new ConsoleActions(this);
     public interface IPlayerActions
     {
         void OnMovement(InputAction.CallbackContext context);
@@ -503,5 +770,15 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         void OnMouseMovement(InputAction.CallbackContext context);
         void OnReset(InputAction.CallbackContext context);
         void OnProjectile(InputAction.CallbackContext context);
+    }
+    public interface IPongActions
+    {
+        void OnMovement(InputAction.CallbackContext context);
+    }
+    public interface IConsoleActions
+    {
+        void OnToggleConsole(InputAction.CallbackContext context);
+        void OnCloseConsole(InputAction.CallbackContext context);
+        void OnExecuteCommand(InputAction.CallbackContext context);
     }
 }

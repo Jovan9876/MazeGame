@@ -489,6 +489,11 @@ MonoBehaviour:
   leftWall: {fileID: 636031501520751017}
   insideLeftWall: {fileID: 4764239929342598209}
   unvistedBlock: {fileID: 8964631094612460867}
+  doorMaterial: {fileID: 2100000, guid: 78ef67552acb92545a27436ef7480fde, type: 2}
+  doorClosedMaterial: {fileID: 2100000, guid: f3ab168fd28673742a38a47eb5a0c847, type: 2}
+  isDoor: 0
+  player: {fileID: 8838683367158208779, guid: 0fc4224ddc56e6a4daf01d9e1d34fb0b, type: 3}
+  enemy: {fileID: 5844510918847910847, guid: 5ddf7aaa99cc5e44db81738f6921afd3, type: 3}
 --- !u!1 &2326124335234184090
 GameObject:
   m_ObjectHideFlags: 0

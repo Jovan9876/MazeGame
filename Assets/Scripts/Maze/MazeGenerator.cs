@@ -1,10 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Unity.Mathematics;
 using UnityEngine;
 using Random = UnityEngine.Random;
 public class MazeGenerator : MonoBehaviour {
 
+    public static MazeGenerator Instance { get; private set; }
 
     [SerializeField] private GameObject rootMazeObject;
     [SerializeField] private MazeCellObject mazeCellPrefab;
@@ -15,9 +18,17 @@ public class MazeGenerator : MonoBehaviour {
     private int startX;
     private int startY;
 
-    MazeCellObject[,] maze;
+    public MazeCellObject[,] maze;
 
     private Stack<Vector2Int> cellStack = new Stack<Vector2Int>(); // Stack for backtracking
+
+    private void Awake() {
+        if (Instance != null) {
+            DestroyImmediate(gameObject);
+        }
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+    }
 
     public enum Direction {
         Forward,
@@ -54,10 +65,19 @@ public class MazeGenerator : MonoBehaviour {
 
         GenerateMazePath();
         SetMaterials();
+        SetPongDoor();
     }
 
     private void SetMaterials() {
         maze[mazeWidth - 1, mazeHeight - 1].SetFinish();
+    }
+
+    private void SetPongDoor() {
+        // Pick a random cell in the maze
+        int randomX = Random.Range(0, mazeWidth - 1);
+        int randomY = Random.Range(0, mazeHeight - 1);
+
+        maze[randomX, randomY].SetDoor();
     }
 
     public void GenerateMazePath() {
