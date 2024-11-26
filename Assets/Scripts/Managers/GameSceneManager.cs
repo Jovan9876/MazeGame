@@ -11,12 +11,15 @@ public class MazeState {
     public float[] playerRotation;  // Stores x, y, z, w as [x, y, z, w]
     public float[] enemyPosition;
     public float[] enemyRotation;
+    public int score;
 }
 
 public class GameSceneManager : MonoBehaviour {
+    public static GameSceneManager Instance { get; private set; }
+    private const string SAVE_FILE = "/data.json";
+
     private MazeState mazeState = new MazeState();
     [SerializeField] private GameObject rootMazeObject;
-    public static GameSceneManager Instance { get; private set; }
 
     private void Awake() {
         if (Instance != null) {
@@ -29,8 +32,8 @@ public class GameSceneManager : MonoBehaviour {
         DontDestroyOnLoad(rootMazeObject);
     }
 
-    public MazeState LoadData(string relativePath) {
-        string path = Application.persistentDataPath + relativePath;
+    public void LoadData() {
+        string path = Application.persistentDataPath + SAVE_FILE;
 
         if (!File.Exists(path)) {
             Debug.LogError($"Cannot load file at {path}. File does not exist!");
@@ -38,18 +41,27 @@ public class GameSceneManager : MonoBehaviour {
         }
 
         try {
-            MazeState data;
-            data = JsonConvert.DeserializeObject<MazeState>(File.ReadAllText(path));
-            return data;
+            mazeState = JsonConvert.DeserializeObject<MazeState>(File.ReadAllText(path));
+
+            Vector3 playerPos = new Vector3(mazeState.playerPosition[0], mazeState.playerPosition[1], mazeState.playerPosition[2]);
+            Quaternion playerRot = new Quaternion(mazeState.playerRotation[0], mazeState.playerRotation[1], mazeState.playerRotation[2], mazeState.playerRotation[3]);
+
+            Vector3 enemyPos = new Vector3(mazeState.enemyPosition[0], mazeState.enemyPosition[1], mazeState.enemyPosition[2]);
+            Quaternion enemyRot = new Quaternion(mazeState.enemyRotation[0], mazeState.enemyRotation[1], mazeState.enemyRotation[2], mazeState.enemyRotation[3]);
+
+            GameManager.Instance.SetScore(mazeState.score);
+            PlayerManager.Instance.transform.SetPositionAndRotation(playerPos, playerRot);
+            EnemyManager.Instance.transform.SetPositionAndRotation(enemyPos, enemyRot);
+
         } catch (Exception e) {
             Debug.LogError($"Failed to load data due to: {e.Message} {e.StackTrace}");
             throw e;
         }
     }
 
-    public bool SaveData(string relativePath) {
+    private void SaveData() {
 
-        string path = Application.persistentDataPath + relativePath;
+        string path = Application.persistentDataPath + SAVE_FILE;
         Debug.Log(path);
         try {
             if (File.Exists(path)) {
@@ -62,14 +74,19 @@ public class GameSceneManager : MonoBehaviour {
 
             stream.Close();
             File.WriteAllText(path, JsonConvert.SerializeObject(mazeState));
-            return true;
         } catch (Exception e) {
             Debug.LogError($"Unable to save data due to: {e.Message} {e.StackTrace}");
-            return false;
         }
     }
 
-    public void SetPlayerCoords() {
+    public void SaveAllData() {
+        SavePlayerData();
+        SaveEnemyData();
+        SaveScore();
+        SaveData();
+    }
+
+    private void SavePlayerData() {
         mazeState.playerPosition = new float[3] {
             PlayerManager.Instance.transform.position.x,
             PlayerManager.Instance.transform.position.y,
@@ -83,7 +100,7 @@ public class GameSceneManager : MonoBehaviour {
         };
     }
 
-    public void SetEnemyCoords() {
+    private void SaveEnemyData() {
         mazeState.enemyPosition = new float[3] {
             EnemyManager.Instance.transform.position.x,
             EnemyManager.Instance.transform.position.y,
@@ -97,30 +114,25 @@ public class GameSceneManager : MonoBehaviour {
         };
     }
 
+    private void SaveScore() {
+        mazeState.score = GameManager.Instance.score;
+    }
+
     public void SetMazeCells() {
         rootMazeObject.SetActive(false);
     }
 
     public void TransitionToPong() {
-        SaveData("/data.json");
         PlayerManager.Instance.gameObject.SetActive(false);
         EnemyManager.Instance.gameObject.SetActive(false);
+        GameManager.Instance.HideScore();
         SceneManager.LoadScene("Pong");
     }
 
     public void ReturnToMaze() {
-        mazeState = LoadData("/data.json");
-        // Convert float arrays back to Vector3 and Quaternion
-        Vector3 playerPos = new Vector3(mazeState.playerPosition[0], mazeState.playerPosition[1], mazeState.playerPosition[2]);
-        Quaternion playerRot = new Quaternion(mazeState.playerRotation[0], mazeState.playerRotation[1], mazeState.playerRotation[2], mazeState.playerRotation[3]);
-
-        Vector3 enemyPos = new Vector3(mazeState.enemyPosition[0], mazeState.enemyPosition[1], mazeState.enemyPosition[2]);
-        Quaternion enemyRot = new Quaternion(mazeState.enemyRotation[0], mazeState.enemyRotation[1], mazeState.enemyRotation[2], mazeState.enemyRotation[3]);
-
-        PlayerManager.Instance.transform.SetPositionAndRotation(playerPos, playerRot);
-        EnemyManager.Instance.transform.SetPositionAndRotation(enemyPos, enemyRot);
-
+        LoadData();
         SceneManager.LoadScene("Maze");
+        GameManager.Instance.ShowScore();
         PlayerManager.Instance.gameObject.SetActive(true);
         EnemyManager.Instance.gameObject.SetActive(true);
         rootMazeObject.SetActive(true);

@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class InputHandler : MonoBehaviour {
-
+    public static InputHandler Instance { get; private set; }
     InputActions inputActions;
     private Vector2 movementInput;
     private Vector2 mouseInput;
@@ -17,6 +17,8 @@ public class InputHandler : MonoBehaviour {
     public bool ResetButtonPressed { get; private set; }
     public bool phase { get; private set; } = true;
 
+    public event Action<bool> OnMenuToggled;
+    private bool menu = false;
 
     private void OnEnable() {
         if (inputActions == null) {
@@ -28,9 +30,22 @@ public class InputHandler : MonoBehaviour {
             inputActions.Player.Phase.performed += TogglePhase;
             inputActions.Player.Reset.performed += Reset_performed;
             inputActions.Player.Projectile.performed += ThrowBallPerformed;
+            inputActions.Player.Menu.performed += state => ToggleMenu();
         }
         inputActions.Enable();
     }
+    private void OnDisable() {
+        inputActions.Disable();
+    }
+
+    private void Awake() {
+        if (Instance == null) {
+            Instance = this;
+        } else {
+            Destroy(gameObject);
+        }
+    }
+
 
     private void ThrowBallPerformed(InputAction.CallbackContext context) {
         PlayerManager.Instance.HandleBallThrow();
@@ -42,9 +57,6 @@ public class InputHandler : MonoBehaviour {
         GameManager.Instance.Reset();
     }
 
-    private void OnDisable() {
-        inputActions.Disable();
-    }
 
     public void HandleAllInputs() {
         HandleMovementInput();
@@ -65,4 +77,8 @@ public class InputHandler : MonoBehaviour {
         phase = !phase;
     }
 
+    private void ToggleMenu() {
+        menu = !menu;
+        OnMenuToggled?.Invoke(menu);
+    }
 }

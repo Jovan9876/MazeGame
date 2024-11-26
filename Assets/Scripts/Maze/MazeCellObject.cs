@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
-using UnityEngine.SceneManagement;
 
-[System.Serializable]
 public class MazeCellObject : MonoBehaviour {
 
     public bool IsVisited { get; private set; } = false;
@@ -142,8 +140,7 @@ public class MazeCellObject : MonoBehaviour {
             } else if (isDoor && isDoorActive) {
                 isDoorActive = false;
                 doorActiveTime = 60f;
-                GameSceneManager.Instance.SetPlayerCoords();
-                GameSceneManager.Instance.SetEnemyCoords();
+                GameSceneManager.Instance.SaveAllData();
                 GameSceneManager.Instance.SetMazeCells();
                 GameSceneManager.Instance.TransitionToPong();
             }

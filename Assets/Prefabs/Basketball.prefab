@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4464813729577104460}
   - component: {fileID: 758184744789018676}
   - component: {fileID: 7778668515233546824}
-  - component: {fileID: 7983475607935028506}
+  - component: {fileID: 8923733923259409678}
   m_Layer: 0
   m_Name: Basketball
   m_TagString: Untagged
@@ -135,7 +135,7 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 1
---- !u!114 &7983475607935028506
+--- !u!114 &8923733923259409678
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -147,3 +147,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69678434014ae1249bbd5fc4d3354bb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scoreText: {fileID: 0}

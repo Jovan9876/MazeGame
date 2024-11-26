@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour {
@@ -21,9 +23,12 @@ public class GameManager : MonoBehaviour {
     public int enemyX;
     public int enemyY;
 
-    [SerializeField] private TMP_Text finishText;
+    [SerializeField] private GameObject menuPanel;
     [SerializeField] private GameObject deathTextPanel;
+    [SerializeField] private TMP_Text finishText;
     [SerializeField] private TMP_Text deathText;
+    public int score = 0;
+    [SerializeField] private TMP_Text scoreText;
 
     private void Awake() {
         if (Instance != null) {
@@ -40,10 +45,10 @@ public class GameManager : MonoBehaviour {
         Cursor.visible = false;
 
         // Releases the cursor
-        Cursor.lockState = CursorLockMode.None;
+        //Cursor.lockState = CursorLockMode.None;
 
         // Locks the cursor
-        Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.lockState = CursorLockMode.Locked;
 
         // Confines the cursor
         Cursor.lockState = CursorLockMode.Confined;
@@ -51,6 +56,8 @@ public class GameManager : MonoBehaviour {
         mazeGenerator = GetComponent<MazeGenerator>();
         mazeGenerator.GenerateMaze(mazeWidth, mazeHeight, startX, startY, cellSize);
         SpawnPlayersAfterMazeGeneration();
+        InputHandler.Instance.OnMenuToggled += ToggleMenu;
+
     }
 
     private void SpawnPlayersAfterMazeGeneration() {
@@ -79,6 +86,43 @@ public class GameManager : MonoBehaviour {
         finishText.gameObject.SetActive(false);
         deathTextPanel.gameObject.SetActive(false);
         deathText.gameObject.SetActive(false);
+        ResetScore();
+    }
+
+    public void AddScore() {
+        score++;
+        Debug.Log(score);
+        scoreText.text = $"Score: {score.ToString()}";
+    }
+
+    public void ResetScore() {
+        score = 0;
+        scoreText.text = $"Score: {score.ToString()}";
+    }
+
+    public void HideScore() {
+        scoreText.gameObject.SetActive(false);
+    }
+
+    public void ShowScore() {
+        scoreText.gameObject.SetActive(true);
+    }
+
+    public void SetScore(int score) {
+        this.score = score;
+        scoreText.text = $"Score: {score.ToString()}";
+    }
+
+    private void ToggleMenu(bool isMenuOpen) {
+        if (isMenuOpen) {
+            menuPanel.gameObject.SetActive(true);
+            Time.timeScale = 0f;
+        } else {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Confined;
+            menuPanel.gameObject.SetActive(false);
+            Time.timeScale = 1f;
+        }
     }
 
 }

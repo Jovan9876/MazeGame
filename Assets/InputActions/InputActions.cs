@@ -71,6 +71,15 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Menu"",
+                    ""type"": ""Button"",
+                    ""id"": ""cfdeee30-8c66-41b8-9d16-8e6bb99b5a3a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -348,6 +357,17 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""action"": ""Projectile"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""98c92f81-c091-4d38-9627-6ee7b7a65a74"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Menu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -512,6 +532,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         m_Player_MouseMovement = m_Player.FindAction("MouseMovement", throwIfNotFound: true);
         m_Player_Reset = m_Player.FindAction("Reset", throwIfNotFound: true);
         m_Player_Projectile = m_Player.FindAction("Projectile", throwIfNotFound: true);
+        m_Player_Menu = m_Player.FindAction("Menu", throwIfNotFound: true);
         // Pong
         m_Pong = asset.FindActionMap("Pong", throwIfNotFound: true);
         m_Pong_Movement = m_Pong.FindAction("Movement", throwIfNotFound: true);
@@ -586,6 +607,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_MouseMovement;
     private readonly InputAction m_Player_Reset;
     private readonly InputAction m_Player_Projectile;
+    private readonly InputAction m_Player_Menu;
     public struct PlayerActions
     {
         private @InputActions m_Wrapper;
@@ -595,6 +617,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         public InputAction @MouseMovement => m_Wrapper.m_Player_MouseMovement;
         public InputAction @Reset => m_Wrapper.m_Player_Reset;
         public InputAction @Projectile => m_Wrapper.m_Player_Projectile;
+        public InputAction @Menu => m_Wrapper.m_Player_Menu;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -619,6 +642,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @Projectile.started += instance.OnProjectile;
             @Projectile.performed += instance.OnProjectile;
             @Projectile.canceled += instance.OnProjectile;
+            @Menu.started += instance.OnMenu;
+            @Menu.performed += instance.OnMenu;
+            @Menu.canceled += instance.OnMenu;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -638,6 +664,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @Projectile.started -= instance.OnProjectile;
             @Projectile.performed -= instance.OnProjectile;
             @Projectile.canceled -= instance.OnProjectile;
+            @Menu.started -= instance.OnMenu;
+            @Menu.performed -= instance.OnMenu;
+            @Menu.canceled -= instance.OnMenu;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -770,6 +799,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         void OnMouseMovement(InputAction.CallbackContext context);
         void OnReset(InputAction.CallbackContext context);
         void OnProjectile(InputAction.CallbackContext context);
+        void OnMenu(InputAction.CallbackContext context);
     }
     public interface IPongActions
     {
